@@ -15,14 +15,14 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   <!-- #---
        HERO SECTION
-       Slim cinematic homepage banner
+       Cinematic 24:9 homepage banner
        #--- -->
 
   <section class="hero">
 
     <!-- #---
          HERO ARTWORK
-         Full width with reduced vertical height
+         Full width cinematic illustration
          #--- -->
 
     <div class="hero-visual">
@@ -143,13 +143,13 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      HERO VISUAL
-     Slimmer desktop banner proportions
+     Exact 24:9 desktop aspect ratio
      #--- */
 
   .hero-visual {
     position: relative;
     width: 100%;
-    aspect-ratio: 2.65 / 1;
+    aspect-ratio: 24 / 9;
     overflow: hidden;
     background: #09090d;
   }
@@ -157,8 +157,8 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      HERO ARTWORK
-     Full width with controlled vertical cropping
-     Lower artwork prioritized for arm and tattoo
+     Full width with controlled cropping
+     Prioritize Asares and his tattoo
      #--- */
 
   .hero-art {
@@ -168,13 +168,13 @@ const heroImage = `${base}/images/asares-banner.png`;
     max-width: none;
 
     object-fit: cover;
-    object-position: center 65%;
+    object-position: center 70%;
   }
 
 
   /* #---
      CINEMATIC OVERLAY
-     Subtle shading behind desktop text
+     Shading behind the desktop title
      #--- */
 
   .hero-visual::after {
@@ -195,7 +195,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      HERO TEXT CONTAINER
-     Upper left placement
+     Upper left positioning
      #--- */
 
   .hero-content {
@@ -213,8 +213,8 @@ const heroImage = `${base}/images/asares-banner.png`;
 
 
   /* #---
-     SMALL SECTION LABELS
-     Iridescent accent text
+     SECTION LABELS
+     Iridescent accent typography
      #--- */
 
   .eyebrow,
@@ -227,8 +227,8 @@ const heroImage = `${base}/images/asares-banner.png`;
 
 
   /* #---
-     MAIN ARALICIA TITLE
-     Cinematic homepage lettering
+     ARALICIA TITLE
+     Main cinematic lettering
      #--- */
 
   h1 {
@@ -294,7 +294,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      EXPLORE SECTION
-     Content below the hero banner
+     Main homepage categories
      #--- */
 
   .explore {
@@ -306,7 +306,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      EXPLORE HEADING
-     Section title typography
+     Section typography
      #--- */
 
   h2 {
@@ -366,7 +366,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      TABLET RESPONSIVE DESIGN
-     Adjustments for medium screens
+     Medium screen adjustments
      #--- */
 
   @media (max-width: 900px) {
@@ -407,7 +407,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     /* #---
        MOBILE HERO ARTWORK
-       Full original image without cropping
+       Full image without cropping
        #--- */
 
     .hero-visual {
@@ -418,6 +418,7 @@ const heroImage = `${base}/images/asares-banner.png`;
     .hero-art {
       width: 100%;
       height: 100%;
+
       object-fit: contain;
       object-position: center;
     }
@@ -429,7 +430,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     /* #---
        MOBILE HERO CONTENT
-       Text displayed beneath the illustration
+       Text beneath the artwork
        #--- */
 
     .hero-content {
@@ -449,7 +450,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     /* #---
        MOBILE ARALICIA TITLE
-       Responsive title size
+       Responsive font size
        #--- */
 
     h1 {
@@ -471,7 +472,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     /* #---
        MOBILE HERO BUTTON
-       Comfortable touch target
+       Touch friendly sizing
        #--- */
 
     .hero-button {
@@ -483,7 +484,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     /* #---
        MOBILE EXPLORE SECTION
-       Reduced padding
+       Reduced spacing
        #--- */
 
     .explore {
@@ -492,8 +493,8 @@ const heroImage = `${base}/images/asares-banner.png`;
 
 
     /* #---
-       MOBILE EXPLORE CARDS
-       Single column layout
+       MOBILE EXPLORE GRID
+       Single column
        #--- */
 
     .explore-grid {
