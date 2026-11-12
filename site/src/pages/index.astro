@@ -2,24 +2,31 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 
-const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-hero.png`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const heroImage = `${base}/images/asares-hero.png`;
 ---
 
 <MainLayout title="Home">
 
-  <section
-    class="hero"
-    style={`background-image:
-      linear-gradient(
-        90deg,
-        rgba(5, 5, 10, 0.78) 0%,
-        rgba(5, 5, 10, 0.30) 65%,
-        rgba(5, 5, 10, 0.10) 100%
-      ),
-      url("${heroImage}");`}
-  >
-    <div class="hero-content">
+  <section class="hero">
 
+    <div class="hero-visual">
+      <div
+        class="hero-backdrop"
+        style={`background-image: url("${heroImage}")`}
+      ></div>
+
+      <img
+        class="hero-art"
+        src={heroImage}
+        alt="Asares wielding iridescent magic"
+        width="1484"
+        height="1060"
+        fetchpriority="high"
+      />
+    </div>
+
+    <div class="hero-content">
       <span class="eyebrow">
         THE OFFICIAL FANTASY UNIVERSE
       </span>
@@ -31,8 +38,8 @@ const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-
       <a class="hero-button" href="#explore">
         EXPLORE ARALICIA
       </a>
-
     </div>
+
   </section>
 
   <section class="explore" id="explore">
@@ -71,23 +78,56 @@ const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-
       </article>
 
     </div>
+
   </section>
 
 </MainLayout>
 
 <style>
   .hero {
-    min-height: 580px;
-    display: flex;
-    align-items: center;
-    padding: 80px 8%;
+    position: relative;
+    background: #09090d;
+    overflow: hidden;
+  }
+
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    height: clamp(560px, 60vw, 760px);
+    overflow: hidden;
+    background: #09090d;
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: -35px;
     background-size: cover;
-    background-position: center 45%;
-    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(28px) brightness(0.28);
+  }
+
+  .hero-art {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
   }
 
   .hero-content {
-    max-width: 850px;
+    position: absolute;
+    z-index: 2;
+    top: 42%;
+    left: 6%;
+    transform: translateY(-50%);
+    max-width: 700px;
+    padding: 28px;
+    background: linear-gradient(
+      90deg,
+      rgba(5, 5, 10, 0.68),
+      rgba(5, 5, 10, 0)
+    );
   }
 
   .eyebrow,
@@ -99,16 +139,16 @@ const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-
   }
 
   h1 {
-    font-size: clamp(60px, 9vw, 130px);
+    font-size: clamp(52px, 7vw, 105px);
     letter-spacing: 0.075em;
     margin: 20px 0 8px;
     color: white;
     line-height: 1.1;
   }
 
-  .hero p {
+  .hero-content p {
     font-family: Georgia, serif;
-    font-size: clamp(22px, 3vw, 36px);
+    font-size: clamp(22px, 2.7vw, 34px);
     font-style: italic;
     color: #f0eaf5;
   }
@@ -117,7 +157,7 @@ const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-
     display: inline-block;
     margin-top: 30px;
     border: 1px solid #c8b0e5;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     padding: 17px 28px;
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -168,10 +208,43 @@ const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-
   }
 
   @media (max-width: 700px) {
-    .hero {
-      min-height: 520px;
-      padding: 70px 24px;
-      background-position: 43% center;
+    .hero-visual {
+      height: auto;
+      aspect-ratio: 1484 / 1060;
+    }
+
+    .hero-backdrop {
+      display: none;
+    }
+
+    .hero-art {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .hero-content {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      max-width: none;
+      padding: 35px 24px 48px;
+      background: #09090d;
+    }
+
+    h1 {
+      font-size: clamp(42px, 11vw, 68px);
+      letter-spacing: 0.055em;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-content p {
+      font-size: clamp(20px, 5vw, 26px);
+    }
+
+    .hero-button {
+      margin-top: 20px;
     }
 
     .explore {
