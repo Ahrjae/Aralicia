@@ -15,14 +15,14 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   <!-- #---
        HERO SECTION
-       Cinematic 21:9 homepage banner
+       Slim cinematic homepage banner
        #--- -->
 
   <section class="hero">
 
     <!-- #---
          HERO ARTWORK
-         Full width without cropping
+         Full width with reduced vertical height
          #--- -->
 
     <div class="hero-visual">
@@ -143,27 +143,32 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      HERO VISUAL
-     Maintains the natural 21:9 proportions
+     Slimmer desktop banner proportions
      #--- */
 
   .hero-visual {
     position: relative;
     width: 100%;
-    aspect-ratio: 1914 / 822;
+    aspect-ratio: 2.65 / 1;
     overflow: hidden;
+    background: #09090d;
   }
 
 
   /* #---
      HERO ARTWORK
-     Full width without zooming or cropping
+     Full width with controlled vertical cropping
+     Lower artwork prioritized for arm and tattoo
      #--- */
 
   .hero-art {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     max-width: none;
+
+    object-fit: cover;
+    object-position: center 65%;
   }
 
 
@@ -190,7 +195,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      HERO TEXT CONTAINER
-     Upper left placement avoids the tattoo
+     Upper left placement
      #--- */
 
   .hero-content {
@@ -223,7 +228,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      MAIN ARALICIA TITLE
-     Reduced size for better composition
+     Cinematic homepage lettering
      #--- */
 
   h1 {
@@ -395,14 +400,14 @@ const heroImage = `${base}/images/asares-banner.png`;
 
   /* #---
      MOBILE RESPONSIVE DESIGN
-     Complete artwork with no cropping
+     Preserve complete artwork on phones
      #--- */
 
   @media (max-width: 700px) {
 
     /* #---
        MOBILE HERO ARTWORK
-       Preserve the full 21:9 illustration
+       Full original image without cropping
        #--- */
 
     .hero-visual {
@@ -412,7 +417,9 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     .hero-art {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
     }
 
     .hero-visual::after {
@@ -422,7 +429,7 @@ const heroImage = `${base}/images/asares-banner.png`;
 
     /* #---
        MOBILE HERO CONTENT
-       Text placed beneath the illustration
+       Text displayed beneath the illustration
        #--- */
 
     .hero-content {
