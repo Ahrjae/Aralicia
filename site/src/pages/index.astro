@@ -1,0 +1,185 @@
+
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const heroImage = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/asares-hero.png`;
+---
+
+<MainLayout title="Home">
+
+  <section
+    class="hero"
+    style={`background-image:
+      linear-gradient(
+        90deg,
+        rgba(5, 5, 10, 0.78) 0%,
+        rgba(5, 5, 10, 0.30) 65%,
+        rgba(5, 5, 10, 0.10) 100%
+      ),
+      url("${heroImage}");`}
+  >
+    <div class="hero-content">
+
+      <span class="eyebrow">
+        THE OFFICIAL FANTASY UNIVERSE
+      </span>
+
+      <h1>ARALICIA</h1>
+
+      <p>Every story begins somewhere.</p>
+
+      <a class="hero-button" href="#explore">
+        EXPLORE ARALICIA
+      </a>
+
+    </div>
+  </section>
+
+  <section class="explore" id="explore">
+
+    <span class="section-label">
+      DISCOVER THE UNIVERSE
+    </span>
+
+    <h2>Explore Aralicia</h2>
+
+    <div class="explore-grid">
+
+      <article>
+        <h3>The Novel</h3>
+        <p>Read chapters, volumes, and story arcs.</p>
+      </article>
+
+      <article>
+        <h3>Characters</h3>
+        <p>Discover Asares, Kaleid, Axel, Thalia, and the cast.</p>
+      </article>
+
+      <article>
+        <h3>World Guide</h3>
+        <p>Explore kingdoms, cultures, creatures, and magic.</p>
+      </article>
+
+      <article>
+        <h3>Lore Archives</h3>
+        <p>Uncover history, legends, and ancient mysteries.</p>
+      </article>
+
+      <article>
+        <h3>Multimedia</h3>
+        <p>Browse illustrations and character artwork.</p>
+      </article>
+
+    </div>
+  </section>
+
+</MainLayout>
+
+<style>
+  .hero {
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    background-size: cover;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+  }
+
+  .hero-content {
+    max-width: 850px;
+  }
+
+  .eyebrow,
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 800;
+    color: #d7baf0;
+  }
+
+  h1 {
+    font-size: clamp(60px, 9vw, 130px);
+    letter-spacing: 0.075em;
+    margin: 20px 0 8px;
+    color: white;
+    line-height: 1.1;
+  }
+
+  .hero p {
+    font-family: Georgia, serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-style: italic;
+    color: #f0eaf5;
+  }
+
+  .hero-button {
+    display: inline-block;
+    margin-top: 30px;
+    border: 1px solid #c8b0e5;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 17px 28px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+  }
+
+  .hero-button:hover {
+    background: rgba(170, 145, 210, 0.25);
+  }
+
+  .explore {
+    max-width: 1200px;
+    margin: auto;
+    padding: 100px 24px;
+  }
+
+  h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(36px, 5vw, 56px);
+    margin: 15px 0 36px;
+  }
+
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  article {
+    border: 1px solid #36323f;
+    background: #141319;
+    padding: 30px;
+    min-height: 165px;
+  }
+
+  article h3 {
+    font-size: 21px;
+    margin: 0 0 12px;
+    color: white;
+  }
+
+  article p {
+    color: #bcb7c6;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .hero {
+      min-height: 520px;
+      padding: 70px 24px;
+      background-position: 43% center;
+    }
+
+    .explore {
+      padding: 65px 20px;
+    }
+
+    .explore-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

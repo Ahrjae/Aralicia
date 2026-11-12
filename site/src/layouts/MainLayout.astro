@@ -1,0 +1,187 @@
+
+---
+const { title = 'Home' } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navigation = [
+  { label: 'THE NOVEL', href: `${base}/novel/` },
+  { label: 'CHARACTERS', href: `${base}/characters/` },
+  { label: 'WORLD GUIDE', href: `${base}/world/` },
+  { label: 'LORE ARCHIVES', href: `${base}/lore/` },
+  { label: 'MULTIMEDIA', href: `${base}/multimedia/` },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The official Aralicia fantasy universe." />
+    <title>{title} | ARALICIA</title>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="logo" href={`${base}/`}>ARALICIA</a>
+        <span class="header-caption">AN ORIGINAL FANTASY UNIVERSE</span>
+      </div>
+    </header>
+
+    <nav class="main-navigation" aria-label="Main navigation">
+      <div class="navigation-inner">
+        {navigation.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <a class="logo" href={`${base}/`}>ARALICIA</a>
+      <p>An original fantasy universe.</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: dark;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #09090d;
+    color: #f5f5f7;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #09090d;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .site-header {
+    background: #09090d;
+    border-bottom: 1px solid #24242b;
+  }
+
+  .header-inner {
+    max-width: 1440px;
+    margin: auto;
+    min-height: 78px;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 0.24em;
+    text-decoration: none;
+    background: linear-gradient(
+      105deg,
+      #ffffff,
+      #bfe5ee,
+      #d9b7e9,
+      #ffffff
+    );
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .header-caption {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: #b7b3c5;
+  }
+
+  .main-navigation {
+    background: #f0eef0;
+    color: #101015;
+  }
+
+  .navigation-inner {
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    padding: 0 32px;
+    min-height: 56px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .navigation-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navigation-inner a {
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    padding: 19px 0;
+  }
+
+  .navigation-inner a:hover,
+  .navigation-inner a:focus-visible {
+    color: #886cba;
+  }
+
+  main {
+    min-height: 65vh;
+  }
+
+  .site-footer {
+    padding: 64px 24px;
+    text-align: center;
+    border-top: 1px solid #292832;
+  }
+
+  .site-footer p {
+    color: #9996a5;
+    font-size: 13px;
+  }
+
+  @media (max-width: 700px) {
+    .header-inner {
+      padding: 16px 20px;
+      min-height: 64px;
+    }
+
+    .logo {
+      font-size: 19px;
+    }
+
+    .header-caption {
+      display: none;
+    }
+
+    .navigation-inner {
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .navigation-inner a {
+      font-size: 11px;
+    }
+  }
+</style>
