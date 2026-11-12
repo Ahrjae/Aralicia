@@ -1,8 +1,17 @@
 
 ---
+// #---
+// MAIN LAYOUT CONFIGURATION
+// #---
+
 const { title = 'Home' } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+
+// #---
+// MAIN NAVIGATION LINKS
+// #---
 
 const navigation = [
   { label: 'THE NOVEL', href: `${base}/novel/` },
@@ -15,41 +24,156 @@ const navigation = [
 
 <!doctype html>
 <html lang="en">
+
+  <!-- #---
+       DOCUMENT HEAD
+       Metadata and website title
+       #--- -->
+
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The official Aralicia fantasy universe." />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta
+      name="description"
+      content="The official Aralicia fantasy universe."
+    />
+
     <title>{title} | ARALICIA</title>
   </head>
 
   <body>
+
+    <!-- #---
+         WEBSITE HEADER
+         Black branding bar scrolls naturally
+         #--- -->
+
     <header class="site-header">
+
       <div class="header-inner">
-        <a class="logo" href={`${base}/`}>ARALICIA</a>
-        <span class="header-caption">AN ORIGINAL FANTASY UNIVERSE</span>
+
+        <a class="logo" href={`${base}/`}>
+          ARALICIA
+        </a>
+
+        <span class="header-caption">
+          AN ORIGINAL FANTASY UNIVERSE
+        </span>
+
       </div>
+
     </header>
 
-    <nav class="main-navigation" aria-label="Main navigation">
+
+    <!-- #---
+         STICKY NAVIGATION
+         White menu remains visible while scrolling
+         #--- -->
+
+    <nav
+      class="main-navigation"
+      aria-label="Main navigation"
+    >
+
       <div class="navigation-inner">
+
         {navigation.map((item) => (
-          <a href={item.href}>{item.label}</a>
+          <a href={item.href}>
+            {item.label}
+          </a>
         ))}
+
       </div>
+
     </nav>
+
+
+    <!-- #---
+         MAIN PAGE CONTENT
+         Displays individual Astro pages
+         #--- -->
 
     <main>
       <slot />
     </main>
 
+
+    <!-- #---
+         WEBSITE FOOTER
+         Bottom branding and description
+         #--- -->
+
     <footer class="site-footer">
-      <a class="logo" href={`${base}/`}>ARALICIA</a>
+
+      <a class="logo" href={`${base}/`}>
+        ARALICIA
+      </a>
+
       <p>An original fantasy universe.</p>
+
     </footer>
+
+
+    <!-- #---
+         STICKY NAVIGATION BEHAVIOR
+         Adds shadow when the menu reaches the top
+         #--- -->
+
+    <script is:inline>
+      const navigationBar = document.querySelector(
+        '.main-navigation'
+      );
+
+      const siteHeader = document.querySelector(
+        '.site-header'
+      );
+
+      function updateNavigation() {
+        if (!navigationBar || !siteHeader) return;
+
+        const headerHeight =
+          siteHeader.getBoundingClientRect().height;
+
+        const isSticky =
+          window.scrollY >= headerHeight;
+
+        navigationBar.classList.toggle(
+          'is-stuck',
+          isSticky
+        );
+      }
+
+      window.addEventListener(
+        'scroll',
+        updateNavigation,
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'resize',
+        updateNavigation
+      );
+
+      updateNavigation();
+    </script>
+
   </body>
+
 </html>
 
+
 <style is:global>
+
+  /* #---
+     GLOBAL WEBSITE SETTINGS
+     Colors, typography, and anchor scrolling
+     #--- */
+
   :root {
     color-scheme: dark;
     font-family: Arial, Helvetica, sans-serif;
@@ -59,6 +183,11 @@ const navigation = [
 
   * {
     box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
   }
 
   body {
@@ -71,27 +200,48 @@ const navigation = [
     color: inherit;
   }
 
+
+  /* #---
+     TOP WEBSITE HEADER
+     Black header scrolls away naturally
+     #--- */
+
   .site-header {
+    position: relative;
     background: #09090d;
     border-bottom: 1px solid #24242b;
   }
+
+
+  /* #---
+     HEADER INNER CONTAINER
+     Logo and description positioning
+     #--- */
 
   .header-inner {
     max-width: 1440px;
     margin: auto;
     min-height: 78px;
     padding: 18px 32px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
   }
 
+
+  /* #---
+     ARALICIA LOGO
+     Iridescent gradient lettering
+     #--- */
+
   .logo {
     font-size: 25px;
     font-weight: 900;
     letter-spacing: 0.24em;
     text-decoration: none;
+
     background: linear-gradient(
       105deg,
       #ffffff,
@@ -99,10 +249,17 @@ const navigation = [
       #d9b7e9,
       #ffffff
     );
+
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
   }
+
+
+  /* #---
+     HEADER CAPTION
+     Original fantasy universe text
+     #--- */
 
   .header-caption {
     font-size: 10px;
@@ -111,34 +268,87 @@ const navigation = [
     color: #b7b3c5;
   }
 
+
+  /* #---
+     STICKY NAVIGATION BAR
+     Stays at top when scrolling
+     #--- */
+
   .main-navigation {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
     background: #f0eef0;
     color: #101015;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    transition:
+      box-shadow 0.25s ease,
+      background 0.25s ease;
   }
+
+
+  /* #---
+     STICKY NAVIGATION SHADOW
+     Activates once black header scrolls away
+     #--- */
+
+  .main-navigation.is-stuck {
+    box-shadow:
+      0 5px 18px rgba(0, 0, 0, 0.28);
+  }
+
+
+  /* #---
+     NAVIGATION INNER CONTAINER
+     Horizontal menu arrangement
+     #--- */
 
   .navigation-inner {
     max-width: 1440px;
     margin: auto;
+
     display: flex;
     align-items: center;
     gap: 34px;
+
     padding: 0 32px;
     min-height: 56px;
+
     overflow-x: auto;
     scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
   }
 
   .navigation-inner::-webkit-scrollbar {
     display: none;
   }
 
+
+  /* #---
+     NAVIGATION LINKS
+     Typography, hover and keyboard focus
+     #--- */
+
   .navigation-inner a {
+    display: inline-flex;
+    align-items: center;
+
     white-space: nowrap;
     text-decoration: none;
+
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.025em;
+
     padding: 19px 0;
+
+    transition: color 0.2s ease;
   }
 
   .navigation-inner a:hover,
@@ -146,9 +356,21 @@ const navigation = [
     color: #886cba;
   }
 
+
+  /* #---
+     MAIN CONTENT
+     Website page container
+     #--- */
+
   main {
     min-height: 65vh;
   }
+
+
+  /* #---
+     WEBSITE FOOTER
+     Bottom page information
+     #--- */
 
   .site-footer {
     padding: 64px 24px;
@@ -161,7 +383,19 @@ const navigation = [
     font-size: 13px;
   }
 
+
+  /* #---
+     MOBILE RESPONSIVE DESIGN
+     iPhone and smaller screens
+     #--- */
+
   @media (max-width: 700px) {
+
+    /* #---
+       MOBILE HEADER
+       Reduced branding height
+       #--- */
+
     .header-inner {
       padding: 16px 20px;
       min-height: 64px;
@@ -175,13 +409,62 @@ const navigation = [
       display: none;
     }
 
+
+    /* #---
+       MOBILE STICKY NAVIGATION
+       Horizontal touch scrolling
+       #--- */
+
+    .main-navigation {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
     .navigation-inner {
       gap: 25px;
       padding: 0 20px;
+
+      min-height: 54px;
+
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x pan-y;
     }
 
     .navigation-inner a {
       font-size: 11px;
+      padding: 18px 0;
     }
+
+
+    /* #---
+       MOBILE ANCHOR SCROLLING
+       Prevent sticky menu covering headings
+       #--- */
+
+    html {
+      scroll-padding-top: 68px;
+    }
+
   }
+
+
+  /* #---
+     REDUCED MOTION ACCESSIBILITY
+     Respect user motion preferences
+     #--- */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    .main-navigation {
+      transition: none;
+    }
+
+  }
+
 </style>
