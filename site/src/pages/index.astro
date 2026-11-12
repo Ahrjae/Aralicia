@@ -1,20 +1,31 @@
 
 ---
+// #---
+// IMPORTS AND IMAGE CONFIGURATION
+// #---
+
 import MainLayout from '../layouts/MainLayout.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const heroImage = `${base}/images/asares-hero.png`;
 ---
 
 <MainLayout title="Home">
 
+  <!-- #---
+       HERO SECTION
+       Main homepage artwork featuring Asares
+       #--- -->
+
   <section class="hero">
 
+    <!-- #---
+         HERO ARTWORK
+         Full width with original proportions
+         #--- -->
+
     <div class="hero-visual">
-      <div
-        class="hero-backdrop"
-        style={`background-image: url("${heroImage}")`}
-      ></div>
 
       <img
         class="hero-art"
@@ -24,9 +35,16 @@ const heroImage = `${base}/images/asares-hero.png`;
         height="1060"
         fetchpriority="high"
       />
+
     </div>
 
+    <!-- #---
+         HERO TEXT
+         Website title, tagline, and main button
+         #--- -->
+
     <div class="hero-content">
+
       <span class="eyebrow">
         THE OFFICIAL FANTASY UNIVERSE
       </span>
@@ -38,9 +56,16 @@ const heroImage = `${base}/images/asares-hero.png`;
       <a class="hero-button" href="#explore">
         EXPLORE ARALICIA
       </a>
+
     </div>
 
   </section>
+
+
+  <!-- #---
+       EXPLORE SECTION
+       Main website content categories
+       #--- -->
 
   <section class="explore" id="explore">
 
@@ -50,31 +75,50 @@ const heroImage = `${base}/images/asares-hero.png`;
 
     <h2>Explore Aralicia</h2>
 
+    <!-- #---
+         EXPLORE CARDS
+         Novel, characters, world, lore, multimedia
+         #--- -->
+
     <div class="explore-grid">
 
       <article>
         <h3>The Novel</h3>
-        <p>Read chapters, volumes, and story arcs.</p>
+        <p>
+          Read chapters, volumes, and story arcs.
+        </p>
       </article>
 
       <article>
         <h3>Characters</h3>
-        <p>Discover Asares, Kaleid, Axel, Thalia, and the cast.</p>
+        <p>
+          Discover Asares, Kaleid, Axel,
+          Thalia, and the cast.
+        </p>
       </article>
 
       <article>
         <h3>World Guide</h3>
-        <p>Explore kingdoms, cultures, creatures, and magic.</p>
+        <p>
+          Explore kingdoms, cultures,
+          creatures, and magic.
+        </p>
       </article>
 
       <article>
         <h3>Lore Archives</h3>
-        <p>Uncover history, legends, and ancient mysteries.</p>
+        <p>
+          Uncover history, legends,
+          and ancient mysteries.
+        </p>
       </article>
 
       <article>
         <h3>Multimedia</h3>
-        <p>Browse illustrations and character artwork.</p>
+        <p>
+          Browse illustrations and
+          character artwork.
+        </p>
       </article>
 
     </div>
@@ -83,52 +127,82 @@ const heroImage = `${base}/images/asares-hero.png`;
 
 </MainLayout>
 
+
 <style>
+
+  /* #---
+     HERO CONTAINER
+     Controls the full width banner
+     #--- */
+
   .hero {
     position: relative;
+    width: 100%;
     background: #09090d;
     overflow: hidden;
   }
+
+
+  /* #---
+     HERO VISUAL
+     Natural image height prevents cropping
+     #--- */
 
   .hero-visual {
     position: relative;
+    display: block;
     width: 100%;
-    height: clamp(560px, 60vw, 760px);
+    height: auto;
     overflow: hidden;
     background: #09090d;
   }
 
-  .hero-backdrop {
-    position: absolute;
-    inset: -35px;
-    background-size: cover;
-    background-position: center;
-    filter: blur(28px) brightness(0.28);
-  }
+
+  /* #---
+     HERO ARTWORK
+     Full width image with no zoom or crop
+     #--- */
 
   .hero-art {
-    position: relative;
     display: block;
     width: 100%;
-    height: 100%;
+    max-width: none;
+    height: auto;
     object-fit: contain;
-    object-position: center;
+    object-position: center center;
   }
+
+
+  /* #---
+     HERO TEXT CONTAINER
+     Positioned over the desktop artwork
+     #--- */
 
   .hero-content {
     position: absolute;
     z-index: 2;
-    top: 42%;
-    left: 6%;
+
+    top: 28%;
+    left: 5%;
+
     transform: translateY(-50%);
+
     max-width: 700px;
     padding: 28px;
+
     background: linear-gradient(
       90deg,
-      rgba(5, 5, 10, 0.68),
-      rgba(5, 5, 10, 0)
+      rgba(5, 5, 10, 0.70) 0%,
+      rgba(5, 5, 10, 0.35) 65%,
+      rgba(5, 5, 10, 0) 100%
     );
   }
+
+
+  /* #---
+     SMALL HEADINGS
+     Iridescent accent typography
+     #--- */
 
   .eyebrow,
   .section-label {
@@ -138,37 +212,75 @@ const heroImage = `${base}/images/asares-hero.png`;
     color: #d7baf0;
   }
 
+
+  /* #---
+     MAIN ARALICIA TITLE
+     Cinematic homepage lettering
+     #--- */
+
   h1 {
     font-size: clamp(52px, 7vw, 105px);
     letter-spacing: 0.075em;
+
     margin: 20px 0 8px;
+
     color: white;
     line-height: 1.1;
   }
 
+
+  /* #---
+     HERO TAGLINE
+     Every story begins somewhere
+     #--- */
+
   .hero-content p {
     font-family: Georgia, serif;
+
     font-size: clamp(22px, 2.7vw, 34px);
     font-style: italic;
+
     color: #f0eaf5;
+    line-height: 1.5;
   }
+
+
+  /* #---
+     HERO BUTTON
+     Explore Aralicia action
+     #--- */
 
   .hero-button {
     display: inline-block;
+
     margin-top: 30px;
+    padding: 17px 28px;
+
     border: 1px solid #c8b0e5;
     background: rgba(0, 0, 0, 0.5);
-    padding: 17px 28px;
+
     font-size: 12px;
     letter-spacing: 0.08em;
     font-weight: 800;
+
     color: white;
     text-decoration: none;
+
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease;
   }
 
   .hero-button:hover {
     background: rgba(170, 145, 210, 0.25);
+    border-color: #e2caff;
   }
+
+
+  /* #---
+     EXPLORE SECTION
+     Main content below the hero
+     #--- */
 
   .explore {
     max-width: 1200px;
@@ -176,23 +288,53 @@ const heroImage = `${base}/images/asares-hero.png`;
     padding: 100px 24px;
   }
 
+
+  /* #---
+     EXPLORE TITLE
+     Section heading typography
+     #--- */
+
   h2 {
     font-family: Georgia, serif;
     font-size: clamp(36px, 5vw, 56px);
+
     margin: 15px 0 36px;
   }
 
+
+  /* #---
+     EXPLORE GRID
+     Desktop content layout
+     #--- */
+
   .explore-grid {
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
   }
 
+
+  /* #---
+     EXPLORE CARDS
+     Individual content categories
+     #--- */
+
   article {
     border: 1px solid #36323f;
     background: #141319;
+
     padding: 30px;
     min-height: 165px;
+
+    transition:
+      border-color 0.25s ease,
+      background 0.25s ease;
+  }
+
+  article:hover {
+    border-color: #a98bc9;
+    background: #1b1823;
   }
 
   article h3 {
@@ -207,52 +349,138 @@ const heroImage = `${base}/images/asares-hero.png`;
     margin: 0;
   }
 
-  @media (max-width: 700px) {
-    .hero-visual {
-      height: auto;
-      aspect-ratio: 1484 / 1060;
+
+  /* #---
+     TABLET RESPONSIVE STYLES
+     Layout adjustments for medium screens
+     #--- */
+
+  @media (max-width: 1000px) {
+
+    .hero-content {
+      top: 30%;
+      left: 3%;
+
+      max-width: 600px;
+      padding: 20px;
     }
 
-    .hero-backdrop {
-      display: none;
+    h1 {
+      font-size: clamp(46px, 7vw, 80px);
+    }
+
+    .explore-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+  }
+
+
+  /* #---
+     MOBILE RESPONSIVE STYLES
+     Full artwork visible on iPhone
+     Text displayed beneath the image
+     #--- */
+
+  @media (max-width: 700px) {
+
+    /* #---
+       MOBILE HERO ARTWORK
+       Preserve full illustration
+       #--- */
+
+    .hero-visual {
+      width: 100%;
+      height: auto;
+      overflow: visible;
     }
 
     .hero-art {
+      display: block;
+
       width: 100%;
       height: auto;
+
       object-fit: contain;
+      object-position: center;
     }
+
+
+    /* #---
+       MOBILE HERO TEXT
+       Position beneath artwork
+       #--- */
 
     .hero-content {
       position: relative;
+
       top: auto;
       left: auto;
+
       transform: none;
+
+      width: 100%;
       max-width: none;
+
       padding: 35px 24px 48px;
+
       background: #09090d;
     }
+
+
+    /* #---
+       MOBILE WEBSITE TITLE
+       Smaller text for narrow screens
+       #--- */
 
     h1 {
       font-size: clamp(42px, 11vw, 68px);
       letter-spacing: 0.055em;
+
       overflow-wrap: anywhere;
     }
+
+
+    /* #---
+       MOBILE TAGLINE
+       Adjusted font sizing
+       #--- */
 
     .hero-content p {
       font-size: clamp(20px, 5vw, 26px);
     }
 
+
+    /* #---
+       MOBILE HERO BUTTON
+       Touch friendly spacing
+       #--- */
+
     .hero-button {
       margin-top: 20px;
+      padding: 15px 24px;
     }
+
+
+    /* #---
+       MOBILE EXPLORE SECTION
+       Reduced spacing for phones
+       #--- */
 
     .explore {
       padding: 65px 20px;
     }
 
+
+    /* #---
+       MOBILE EXPLORE CARDS
+       Single column layout
+       #--- */
+
     .explore-grid {
       grid-template-columns: 1fr;
     }
+
   }
+
 </style>
